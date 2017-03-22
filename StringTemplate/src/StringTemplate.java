@@ -14,13 +14,13 @@ class Attributo{
     public String getValue(){return value;}
     
     public String renderAttributo(String lang){
-		//ApplicationContext context = new AnnotationConfigApllicationContext(Config.class);
-		//RenderAttribute re = (RenderAttribute)context.getBean(lang);
-		//re.fillTemplate(st) //chiamata polimorfa al template lang giusto
+		//creiamo una gerarchia di render ognuno dei quali verrà esteso con con degli oggetti specifici per il linguaggio
+    	
+    	//ApplicationContext context = new AnnotationConfigApllicationContext(Config.class);
+		//RenderElement re = (RenderElement)context.getBean(lang+"Attribute");
+		//return re.fillTemplate(st) //chiamata polimorfa al template lang giusto
 	
-    	//creiamo una gerarchia di render ognuno dei quali verrà esteso con con degli oggetti specifici per il linguaggio
-		
-    	return fillTemplate(lang);
+    	return fillTemplate(lang); //da eliminare
     }
     
     //apparterrebbe al RenderAttributeJava
