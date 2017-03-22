@@ -1,22 +1,25 @@
 import org.stringtemplate.v4.*;
 
 class Attributo{
+	private String visibility;
     private String type;
     private String name;
     private String value;
     
-    public Attributo(String t,String n, String v){type = t; name = n; value = v;}
+    public Attributo(String vis, String t,String n, String val){ visibility = vis; type = t; name = n; value = val;}
     
+    public String getVisibility(){ return visibility;}
     public String getType(){return type;}
     public String getName(){return name;}
     public String getValue(){return value;}
     
-    public String renderAttributo(Attributo a){
+    public String renderAttributo(){
     	STGroup group = new STGroupFile("test.stg");
 		ST st = group.getInstanceOf("decl");
-		st.add("type", a.getType());
-		st.add("name", a.getName());
-		st.add("value", a.getValue());
+		st.add("visibility", this.getVisibility());
+		st.add("type", this.getType());
+		st.add("name", this.getName());
+		st.add("value", this.getValue());
 		return st.render();
     }
 }
@@ -25,11 +28,11 @@ public class StringTemplate {
 	public static void main(String[] args){
 		Attributo[] arrayAttr;
 		arrayAttr = new Attributo[3];
-		arrayAttr[0] = new Attributo("int", "x", "1");
-		arrayAttr[1] = new Attributo("int", "y", "");
-		arrayAttr[2] = new Attributo("int", "z", "2");
+		arrayAttr[0] = new Attributo("public", "int", "x", "1");
+		arrayAttr[1] = new Attributo("private", "int", "y", null);
+		arrayAttr[2] = new Attributo(null, "int", "z", "2");
 		
 		for(int i = 0; i<arrayAttr.length; i++)
-			System.out.println(arrayAttr[i].renderAttributo(arrayAttr[i]));
+			System.out.println(arrayAttr[i].renderAttributo());
 	}
 }
