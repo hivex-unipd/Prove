@@ -13,10 +13,21 @@ class Attributo{
     public String getName(){return name;}
     public String getValue(){return value;}
     
-    public String renderAttributo(){
-    	STGroup group = new STGroupFile("test.stg");
+    public String renderAttributo(String lang){
+		//ApplicationContext context = new AnnotationConfigApllicationContext(Config.class);
+		//RenderAttribute re = (RenderAttribute)context.getBean(lang);
+		//re.fillTemplate(st) //chiamata polimorfa al template lang giusto
+	
+    	//creiamo una gerarchia di render ognuno dei quali verrà esteso con con degli oggetti specifici per il linguaggio
+		
+    	return fillTemplate(lang);
+    }
+    
+    //apparterrebbe al RenderAttributeJava
+    public String fillTemplate(String lang){
+    	STGroup group = new STGroupFile("attribute"+lang+"template.stg");
 		ST st = group.getInstanceOf("decl");
-		st.add("visibility", this.getVisibility());
+    	st.add("visibility", this.getVisibility());
 		st.add("type", this.getType());
 		st.add("name", this.getName());
 		st.add("value", this.getValue());
@@ -33,6 +44,6 @@ public class StringTemplate {
 		arrayAttr[2] = new Attributo(null, "int", "z", "2");
 		
 		for(int i = 0; i<arrayAttr.length; i++)
-			System.out.println(arrayAttr[i].renderAttributo());
+			System.out.println(arrayAttr[i].renderAttributo("java"));
 	}
 }

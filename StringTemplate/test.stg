@@ -1,3 +1,0 @@
-decl(visibility, type, name, value) ::= "<initVis(visibility)><type> <name><initVal(value)>;"
-initVal(v) ::= "<if(v)> = <v><endif>"
-initVis(v) ::= "<if(v)><v> <endif>"
