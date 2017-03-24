@@ -1,0 +1,37 @@
+GUIDA STRINGTEMPLATE
+
+GROUPDIR
+(1) Divisione template in file con estensione .st con lo stesso nome del template
+Esempio:attributejavatemplate(visibility, type, name, value) ::= "<initVis(visibility)><type> <name><initVal(value)>;" in un file di nome attributejavatemplate.st
+	initVal(v) ::= "<if(v)> = <v><endif>" in initVal.st
+	initVis(v) ::= "<if(v)><v> <endif>" in initVis.st
+
+(2) Aggiungere al file chimante del template la dichiarazione:
+STGroup group = new STGroupDir("src/main/resources");
+
+GROUPFILE
+(1) Creo un unico file con estensione .stg con un nome qualsiasi
+
+(2) Inserisco dentro al file il gruppo di template
+Esempio:attributejavatemplate(visibility, type, name, value) ::= "<initVis(visibility)><type> <name><initVal(value)>;"
+	initVal(v) ::= "<if(v)> = <v><endif>"
+	initVis(v) ::= "<if(v)><v> <endif>"
+
+(3) Aggiungere al file chimante del template la dichiarazione con il nome del file template:
+STGroup group = new STGroupFile("attributejavatemplate.stg");
+
+Si possono passare oggetti o al template ed accedere ad essi tramite l'operazione o.p che cerca nell'ordine:
+1) getP()
+2) isP()
+3) hasP()
+4) campo dati denominato P non privato
+
+AGGREGATI
+http://www.stringtemplate.org/api/org/stringtemplate/v4/ST
+Esempio(non seguire esempio guida github):
+	ST st = new ST("<items:{it|<it.id>: <it.lastName>, <it.firstName>\n}>");
+	st.addAggr("items.{firstName, lastName, id}", new Object[]{"Ter", "Parr", new Integer(99)}); //OK add() uses varargs
+	//st.addAggr("items.{firstName, lastName, id}", "Tom", "Burns", 34); //NON USARE
+	System.out.println(st.render());
+
+
